@@ -8,7 +8,7 @@ NETPLANCONF=/etc/netplan/50-cloud-init.yaml
 sudo dpkg-reconfigure openssh-server
 
 # set hostname
-echo $HOSTNAME > /etc/hostname
+echo $HOSTNAME | sudo tee /etc/hostname > /dev/null
 
 # fix the hosts file
 sed s/skel1/$HOSTNAME/ /etc/hosts > /tmp/hosts.conf
