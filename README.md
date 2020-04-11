@@ -1,11 +1,20 @@
 # openstack_installation
 
-ECE 530 Cloud Computing
+## ECE 530 Cloud Computing
+## Homework 1
+
 This is a collection of script files written to automate
 the installation of OpenStack Train on Ubuntu 18.04.4
 
+The commands executed come from the following document:
 
-## Controller install
+https://docs.openstack.org/install-guide/openstack-services.html#minimal-deployment-for-train
+
+I have made a few small changes to help with automation and to fix
+any problems encountered.
+
+
+### Controller install
 
 I have a skeleton VM setup on Virtual Box which has
 these Ubuntu 18.04.4 installed and this scripts.
@@ -47,7 +56,7 @@ for the minimal installation can be installed like this:
 ./install.sh minimal controller
 ```
 
-## Compute node install
+### Compute node install
 
 Make another clone of the skel VM, login and run the following command:
 
