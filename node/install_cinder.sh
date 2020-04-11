@@ -21,8 +21,17 @@ fi
 #
 sudo apt install lvm2 thin-provisioning-tools
 
+
+# create the volume
 sudo pvcreate /dev/sdb
 sudo vgcreate cinder-volumes /dev/sdb
+
+#
+# fix the filter in lvm.conf
+#
+sed 's/# filter = \[ "r|/dev/cdrom|" \]/filter = [ "a/sdb/", "r/.*/"]/' /etc/lvm/lvm.conf > /tmp/lvmconf
+cp /tmp/lvmconf /etc/lvm/lvm.conf
+rm /tmp/lvmconf
 
 #
 # install and configure components
