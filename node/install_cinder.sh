@@ -9,7 +9,7 @@
 #
 
 if [ -b "/dev/sdb" ]; then
-# cool
+	echo "found /dev/sdb!"
 else
 	echo "Must have a /dev/sdb device!"
 	exit 1;
@@ -29,8 +29,8 @@ sudo vgcreate cinder-volumes /dev/sdb
 #
 # fix the filter in lvm.conf
 #
-sed 's/# filter = \[ "r|/dev/cdrom|" \]/filter = [ "a/sdb/", "r/.*/"]/' /etc/lvm/lvm.conf > /tmp/lvmconf
-cp /tmp/lvmconf /etc/lvm/lvm.conf
+sed 's/# filter = \[ "r|\/dev\/cdrom|" \]/filter = [ "a\/sdb\/", "r\/.*\/"]/' /etc/lvm/lvm.conf > /tmp/lvmconf
+sudo cp /tmp/lvmconf /etc/lvm/lvm.conf
 rm /tmp/lvmconf
 
 #
