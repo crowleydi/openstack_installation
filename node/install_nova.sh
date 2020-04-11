@@ -8,9 +8,9 @@
 # compute node nova service
 #
 
-apt install nova-compute
+sudo apt install nova-compute
 
-cat <<EOF | sudo tee /etc/nova/nova.conf
+cat <<EOF | sudo tee /etc/nova/nova.conf > /dev/null
 [DEFAULT]
 transport_url = rabbit://openstack:$RABBIT_PASS@controller
 my_ip = $IP
@@ -64,7 +64,7 @@ username = neutron
 password = $NEUTRON_PASS
 EOF
 
-cat <<EOF | sudo tee -a /etc/nova/nova-compute.conf
+cat <<EOF | sudo tee -a /etc/nova/nova-compute.conf > /dev/null
 [libvirt]
 virt_type = qemu
 EOF
