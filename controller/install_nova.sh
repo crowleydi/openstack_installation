@@ -137,6 +137,5 @@ sudo service nova-api restart
 sudo service nova-scheduler restart
 sudo service nova-conductor restart
 sudo service nova-novncproxy restart
-sudo service neutron-linuxbridge-agent restart
 
 openstack compute service list --service nova-compute
