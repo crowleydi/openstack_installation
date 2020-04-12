@@ -11,7 +11,7 @@ sudo dpkg-reconfigure openssh-server
 echo $HOSTNAME | sudo tee /etc/hostname > /dev/null
 
 # fix the hosts file
-sed s/skel1/$HOSTNAME/ /etc/hosts > /tmp/hosts.conf
+sed s/skeleton/$HOSTNAME/ /etc/hosts > /tmp/hosts.conf
 sudo cp /tmp/hosts.conf /etc/hosts
 rm /tmp/hosts.conf
 
