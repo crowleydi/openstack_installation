@@ -13,10 +13,10 @@ sudo add-apt-repository cloud-archive:train
 
 # update the repository
 sudo apt update
-sudo apt upgrade
+sudo apt-get -y upgrade
 
 # install the base line packages
-sudo apt install chrony python3-openstackclient
+sudo apt-get -y install chrony python3-openstackclient
 
 # add some default machines to /etc/hosts
 cat <<EOF | sudo tee -a /etc/hosts > /dev/null

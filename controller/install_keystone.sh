@@ -27,7 +27,7 @@ EOF
 #
 # install the keystone service
 #
-sudo apt install keystone
+sudo $APT install keystone
 
 # setup the configuration file
 cat <<EOF | sudo tee -a /etc/keystone/keystone.conf > /dev/null

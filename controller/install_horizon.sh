@@ -7,7 +7,7 @@
 # Install script for OpenStack Minimal deployment for Train
 # horizon service
 
-sudo apt install openstack-dashboard
+sudo $APT install openstack-dashboard
 
 cat << EOF | sudo tee -a /etc/openstack-dashboard/local_settings.py > /dev/null
 

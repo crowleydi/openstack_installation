@@ -60,7 +60,7 @@ openstack endpoint create --region RegionOne \
 #
 # install components
 #
-sudo apt install cinder-api cinder-scheduler
+sudo $APT install cinder-api cinder-scheduler
 
 #
 # setup the config file

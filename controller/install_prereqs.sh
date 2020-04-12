@@ -19,7 +19,7 @@ sudo apt-get install software-properties-common
 sudo apt-key adv --fetch-keys 'https://mariadb.org/mariadb_release_signing_key.asc'
 sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.netinch.com/pub/mariadb/repo/10.4/ubuntu bionic main'
 
-sudo apt install mariadb-server python-pymysql
+sudo $APT install mariadb-server python-pymysql
 
 cat <<EOF | sudo tee /etc/mysql/mariadb.conf.d/99-openstack.cnf > /dev/null
 [mysqld]
@@ -39,14 +39,14 @@ sudo mysql_secure_installation
 #
 # install rabbit message queue
 #
-sudo apt install rabbitmq-server
+sudo $APT install rabbitmq-server
 sudo rabbitmqctl add_user openstack RABBIT_PASS
 sudo rabbitmqctl set_permissions openstack ".*" ".*" ".*"
 
 #
 # install memcached
 #
-sudo apt install memcached python-memcache
+sudo $APT install memcached python-memcache
 # fix ip address of listener
 sed s/127\\.\\0.\\0\\.1/$IP/ /etc/memcached.conf > /tmp/memcached.conf
 sudo cp /tmp/memcached.conf /etc/memcached.conf
@@ -56,7 +56,7 @@ sudo service memcached restart
 #
 # install etcd
 #
-sudo apt install etcd
+sudo $APT install etcd
 cat <<EOF | sudo tee /etc/default/etcd > /dev/null
 ETCD_NAME="controller"
 ETCD_DATA_DIR="/var/lib/etcd"
