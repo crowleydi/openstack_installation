@@ -30,5 +30,19 @@ password = $NEUTRON_PASS
 lock_path = /var/lib/neutron/tmp
 EOF
 
+sudo mkdir -p /etc/neutron/plugins/ml2
+cat <<EOF | sudo tee /etc/neutron/plugins/ml2/linuxbridge_agent.ini > /dev/null
+[linux_bridge]
+physical_interface_mappings = provider:enp0s3
+
+[vxlan]
+enable_vxlan = false
+
+[securitygroup]
+enable_security_group = true
+firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+
+EOF
+
 sudo service nova-compute restart
 sudo service neutron-linuxbridge-agent restart

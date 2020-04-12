@@ -55,7 +55,7 @@ openstack endpoint create --region RegionOne \
 
 sudo apt-get -y install neutron-server neutron-plugin-ml2 \
   neutron-linuxbridge-agent neutron-dhcp-agent \
-  neutron-metadata-agent
+  neutron-metadata-agent python-oslo.privsep
 
 cat <<EOF | sudo tee /etc/neutron/neutron.conf > /dev/null
 [DEFAULT]
