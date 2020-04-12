@@ -150,23 +150,6 @@ metadata_proxy_shared_secret = $METADATA_SECRET
 
 EOF
 
-#
-# configure the nova compute service to use the
-# networking service
-sudo cat <<EOF| sudo tee -a /etc/nova/nova.conf > /dev/null
-[neutron]
-auth_url = http://controller:5000
-auth_type = password
-project_domain_name = default
-user_domain_name = default
-region_name = RegionOne
-project_name = service
-username = neutron
-password = $NEUTRON_PASS
-service_metadata_proxy = true
-metadata_proxy_shared_secret = $METADATA_SECRET
-
-EOF
 
 #
 # finalize the installation
