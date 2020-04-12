@@ -170,4 +170,4 @@ sudo service neutron-metadata-agent restart
 #
 # verify the service
 . ./admin-openrc
-openstack extension list --network
+openstack network agent list
