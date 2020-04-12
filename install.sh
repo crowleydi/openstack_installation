@@ -1,6 +1,6 @@
 #!/bin/sh
 # must change this to YES once appropriate passwords have been selected
-export PASSWORDS_SET=YES
+export PASSWORDS_SET=NO
 
 export ADMIN_PASS=ADMIN_PASS
 export CINDER_DBPASS=CINDER_DBPASS
@@ -16,11 +16,14 @@ export NOVA_DBPASS=NOVA_DBPASS
 export NOVA_PASS=NOVA_PASS
 export PLACEMENT_PASS=PLACEMENT_PASS
 export RABBIT_PASS=RABBIT_PASS
+export SWIFT_PASS=SWIFT_PASS
+
 export METADATA_SECRET=METADATA_SECRET
 
 # set management interface
 export MANAGEMENT_INTERFACE=enp0s3
-# get to the ip address of the network interface
+
+# figure out the ip address of the network interface
 export IP=`ifconfig $MANAGEMENT_INTERFACE | awk '/inet /{print $2}'`
 
 if [ "$PASSWORDS_SET" != "YES" ]; then
