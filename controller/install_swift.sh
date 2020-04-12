@@ -42,9 +42,29 @@ sudo apt install swift swift-proxy python-swiftclient \
   python-keystoneclient python-keystonemiddleware \
   memcached
 
+# get default swift config from opendev.org
+sudo curl -o /etc/swift/swift.conf.orig \
+  https://opendev.org/openstack/swift/raw/branch/master/etc/swift.conf-sample
+ 
+#
+# setup the config
+cat <<EOF | sudo tee /etc/swift/swift.conf
+[swift-hash]
+swift_hash_path_suffix = zxd32
+swift_hash_path_prefix = dzx23
+
+[storage-policy:0]
+name = Policy-0
+default = yes
+aliases = yellow, orange
+
+EOF
+
 # obtain proxy service config file from Object Storage source repo
+sudo mkdir -p /etc/swift
 sudo curl -o /etc/swift/proxy-server.conf https://opendev.org/openstack/swift/raw/branch/master/etc/proxy-server.conf-sample
 
+# setup the proxy config
 cat <<EOF | sudo tee -a /etc/swift/proxy-server.conf > /dev/null
 [DEFAULT]
 bind_port = 8080
@@ -82,7 +102,8 @@ memcache_servers = controller:11211
 
 EOF
 
-pushd /etc/swift
+_pushd=`pwd`
+cd /etc/swift
 
 #
 # create account ring
@@ -123,28 +144,10 @@ sudo swift-ring-builder object.builder
 # rebalance the ring
 sudo swift-ring-builder object.builder rebalance
 
+cd $_pushd
 
-popd
 #
 # finalize
-#
-# get default swift config from opendev.org
-sudo curl -o /etc/swift/swift.conf \
-  https://opendev.org/openstack/swift/raw/branch/master/etc/swift.conf-sample
- 
-#
-# setup the config
-cat <<EOF | sudo tee -a /etc/swift/swift.conf
-[swift-hash]
-swift_hash_path_suffix = zxd32
-swift_hash_path_prefix = dzx23
-
-[storage-policy:0]
-name = Policy-0
-default = yes
-
-EOF
-
 cat <<EOF
 
 
