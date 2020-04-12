@@ -31,3 +31,7 @@ cat <<EOF | sudo tee -a /etc/hosts > /dev/null
 10.0.0.51	object1
 10.0.0.52	object2
 EOF
+
+#
+# get the scripts
+git clone https://github.com/crowleydi/openstack_installation.git
