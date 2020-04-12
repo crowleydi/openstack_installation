@@ -150,6 +150,17 @@ metadata_proxy_shared_secret = $METADATA_SECRET
 
 EOF
 
+#
+# FIX SUDOERS file
+#
+sudoers = /etc/sudoers.d/neutron_sudoers
+sudo chmod 660 $sudoers
+cat <<EOF | sudo tree -a $sudoers > /dev/null
+neutron ALL = (root) NOPASSWD: /usr/bin/privsep-helper
+neutron ALL = (root) NOPASSWD: /sbin/iptables-save
+neutron ALL = (root) NOPASSWD: /sbin/ebtables
+EOF
+sudo chmod 440 $sudoers
 
 #
 # finalize the installation

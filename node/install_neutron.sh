@@ -8,7 +8,7 @@
 # compute node nova service
 #
 
-sudo apt-get -y install neutron-linuxbridge-agent
+sudo apt-get -y install neutron-linuxbridge-agent python-oslo.privsep
 
 cat <<EOF | sudo tee /etc/neutron/neutron.conf > /dev/null
 [DEFAULT]
@@ -43,6 +43,18 @@ enable_security_group = true
 firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
 
 EOF
+
+#
+# FIX SUDOERS file
+#
+sudoers = /etc/sudoers.d/neutron_sudoers
+sudo chmod 660 $sudoers
+cat <<EOF | sudo tree -a $sudoers > /dev/null
+neutron ALL = (root) NOPASSWD: /usr/bin/privsep-helper
+neutron ALL = (root) NOPASSWD: /sbin/iptables-save
+neutron ALL = (root) NOPASSWD: /sbin/ebtables
+EOF
+sudo chmod 440 $sudoers
 
 sudo service nova-compute restart
 sudo service neutron-linuxbridge-agent restart
