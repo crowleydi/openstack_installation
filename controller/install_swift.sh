@@ -107,7 +107,7 @@ cd /etc/swift
 
 #
 # create account ring
-sudo swift-ring-builder account.builder create 10 3 1
+sudo swift-ring-builder account.builder create 10 2 1
 # add the two default hosts
 sudo swift-ring-builder account.builder add --region 1 --zone 1 \
    --ip 10.0.0.51 --port 6202 --device sdb --weight 100
@@ -120,7 +120,7 @@ sudo swift-ring-builder account.builder rebalance
 
 #
 # create container ring
-sudo swift-ring-builder container.builder create 10 3 1
+sudo swift-ring-builder container.builder create 10 2 1
 # add the two default hosts
 sudo swift-ring-builder container.builder add --region 1 --zone 1 \
     --ip 10.0.0.51 --port 6201 --device sdb --weight 100
@@ -133,7 +133,7 @@ sudo swift-ring-builder container.builder rebalance
 
 #
 # create object ring
-sudo swift-ring-builder object.builder create 10 3 1
+sudo swift-ring-builder object.builder create 10 2 1
 # add the two default hosts
 sudo swift-ring-builder object.builder add --region 1 --zone 1 \
     --ip 10.0.0.51 --port 6200 --device sdb --weight 100
