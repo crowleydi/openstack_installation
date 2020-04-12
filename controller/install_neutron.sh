@@ -101,12 +101,15 @@ EOF
 cat <<EOF| sudo tee /etc/neutron/plugins/ml2/ml2_conf.ini > /dev/null
 [ml2]
 type_drivers = flat,vlan
-tenant_network_types =
+tenant_network_types = vlan
 mechanism_drivers = linuxbridge
 extension_drivers = port_security
 
 [ml2_type_flat]
 flat_networks = provider
+
+[ml2_type_vlan]
+network_vlan_ranges = vlan:5:200
 
 [securitygroup]
 enable_ipset = true
