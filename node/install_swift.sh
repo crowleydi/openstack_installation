@@ -34,7 +34,7 @@ fi
 # pre-requisites
 
 # XFS filesystem is the "best" for this
-sudo $APT install xfsprogs rsync
+sudo apt-get -y install xfsprogs rsync
 sudo mkfs.xfs /dev/sdb
 sudo mkdir -p /srv/node/sdb
 
@@ -81,7 +81,7 @@ sudo service rsync start
 
 #
 # install the swift packages
-sudo $APT install swift swift-account swift-container swift-object
+sudo apt-get -y install swift swift-account swift-container swift-object
 
 #
 # get default configs from opendev.org

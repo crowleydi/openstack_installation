@@ -48,7 +48,7 @@ openstack endpoint create --region RegionOne \
 #
 # install the placement service
 #
-sudo $APT install placement-api
+sudo apt-get -y install placement-api
 
 cat <<EOF | sudo tee /etc/placement/placement.conf > /dev/null
 [placement_database]

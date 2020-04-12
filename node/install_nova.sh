@@ -8,7 +8,7 @@
 # compute node nova service
 #
 
-sudo $APT install nova-compute
+sudo apt-get -y install nova-compute
 
 cat <<EOF | sudo tee /etc/nova/nova.conf > /dev/null
 [DEFAULT]

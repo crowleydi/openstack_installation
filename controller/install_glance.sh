@@ -48,7 +48,7 @@ openstack endpoint create --region RegionOne \
 #
 # install the glance service
 #
-sudo $APT install glance
+sudo apt-get -y install glance
 
 #
 # setup the config file

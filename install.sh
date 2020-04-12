@@ -27,10 +27,6 @@ export MANAGEMENT_INTERFACE=enp0s3
 # figure out the ip address of the network interface
 export IP=`ifconfig $MANAGEMENT_INTERFACE | awk '/inet /{print $2}'`
 
-#
-# command to use for apt
-APT=apt-get --yes
-
 if [ "$PASSWORDS_SET" != "YES" ]; then
 	echo Must setup passwords!
 	exit 1;

@@ -53,7 +53,7 @@ openstack endpoint create --region RegionOne \
 # install the neutron service components
 #
 
-sudo $APT install neutron-server neutron-plugin-ml2 \
+sudo apt-get -y install neutron-server neutron-plugin-ml2 \
   neutron-linuxbridge-agent neutron-dhcp-agent \
   neutron-metadata-agent
 

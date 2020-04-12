@@ -38,7 +38,7 @@ openstack endpoint create --region RegionOne \
 #
 # install the placement service
 #
-sudo $APT install swift swift-proxy python-swiftclient \
+sudo apt-get -y install swift swift-proxy python-swiftclient \
   python-keystoneclient python-keystonemiddleware \
   memcached
 

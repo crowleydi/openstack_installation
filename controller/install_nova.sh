@@ -55,7 +55,7 @@ openstack endpoint create --region RegionOne \
 #
 # install the packages
 #
-sudo $APT install nova-api nova-conductor nova-novncproxy nova-scheduler
+sudo apt-get -y install nova-api nova-conductor nova-novncproxy nova-scheduler
 
 #
 # configuration

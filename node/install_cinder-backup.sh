@@ -18,7 +18,7 @@ fi
 #
 # install the package
 #
-sudo $APT install cinder-backup
+sudo apt-get -y install cinder-backup
 
 openstack catalog show object-store
 

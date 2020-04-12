@@ -19,7 +19,7 @@ fi
 #
 # install pre-requisites
 #
-sudo $APT install lvm2 thin-provisioning-tools
+sudo apt-get -y install lvm2 thin-provisioning-tools
 
 
 # create the volume
@@ -36,7 +36,7 @@ rm /tmp/lvmconf
 #
 # install and configure components
 #
-sudo $APT install cinder-volume
+sudo apt-get -y install cinder-volume
 cat <<EOF | sudo tee /etc/cinder/cinder.conf > /dev/null
 [DEFAULT]
 transport_url = rabbit://openstack:$RABBIT_PASS@controller
