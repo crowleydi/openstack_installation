@@ -43,12 +43,13 @@ sudo apt-get -y install swift swift-proxy python-swiftclient \
   memcached
 
 # get default swift config from opendev.org
-sudo curl -o /etc/swift/swift.conf.orig \
+sudo mkdir -p /etc/swift
+sudo curl -o /etc/swift/swift.conf-sample \
   https://opendev.org/openstack/swift/raw/branch/master/etc/swift.conf-sample
  
 #
 # setup the config
-cat <<EOF | sudo tee /etc/swift/swift.conf
+cat <<EOF | sudo tee /etc/swift/swift.conf > /dev/null
 [swift-hash]
 swift_hash_path_suffix = zxd32
 swift_hash_path_prefix = dzx23
@@ -61,8 +62,7 @@ aliases = yellow, orange
 EOF
 
 # obtain proxy service config file from Object Storage source repo
-sudo mkdir -p /etc/swift
-sudo curl -o /etc/swift/proxy-server.conf https://opendev.org/openstack/swift/raw/branch/master/etc/proxy-server.conf-sample
+sudo curl -o /etc/swift/proxy-server.conf-sample https://opendev.org/openstack/swift/raw/branch/master/etc/proxy-server.conf-sample
 
 # setup the proxy config
 cat <<EOF | sudo tee -a /etc/swift/proxy-server.conf > /dev/null
