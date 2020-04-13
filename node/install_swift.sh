@@ -91,46 +91,109 @@ sudo curl -o /etc/swift/object-server.conf https://opendev.org/openstack/swift/r
 
 #
 # edit config files
-cat <<EOF | sudo tee -a /etc/swift/account-server.conf > /dev/null
+cat <<EOF | sudo tee /etc/swift/account-server.conf > /dev/null
 [DEFAULT]
 bind_ip = $IP
-#bind_port = 6202
+bind_port = 6202
 user = swift
 swift_dir = /etc/swift
 devices = /srv/node
 mount_check = True
 
+[pipeline:main]
+pipeline = healthcheck recon account-server
+
+[app:account-server]
+use = egg:swift#account
+
+[filter:healthcheck]
+use = egg:swift#healthcheck
+
 [filter:recon]
+use = egg:swift#recon
 recon_cache_path = /var/cache/swift
+
+[account-replicator]
+
+[account-auditor]
+
+[account-reaper]
+
+[filter:xprofile]
+use = egg:swift#xprofile
+EOF
+
+cat <<EOF | sudo tee /etc/swift/container-server.conf > /dev/null
+[DEFAULT]
+bind_ip = $IP
+bind_port = 6201
+user = swift
+swift_dir = /etc/swift
+devices = /srv/node
+mount_check = True
+
+[pipeline:main]
+pipeline = healthcheck recon container-server
+
+[app:container-server]
+use = egg:swift#container
+
+[filter:healthcheck]
+use = egg:swift#healthcheck
+
+[filter:recon]
+use = egg:swift#recon
+recon_cache_path = /var/cache/swift
+
+[container-replicator]
+
+[container-updater]
+
+[container-auditor]
+
+[container-sync]
+
+[filter:xprofile]
+use = egg:swift#xprofile
+
+[container-sharder]
 
 EOF
 
-cat <<EOF | sudo tee -a /etc/swift/container-server.conf > /dev/null
+cat <<EOF | sudo tee /etc/swift/object-server.conf > /dev/null
 [DEFAULT]
 bind_ip = $IP
-#bind_port = 6201
+bind_port = 6200
 user = swift
 swift_dir = /etc/swift
 devices = /srv/node
 mount_check = True
 
-[filter:recon]
-recon_cache_path = /var/cache/swift
+[pipeline:main]
+pipeline = healthcheck recon object-server
 
-EOF
+[app:object-server]
+use = egg:swift#object
 
-cat <<EOF | sudo tee -a /etc/swift/object-server.conf > /dev/null
-[DEFAULT]
-bind_ip = $IP
-#bind_port = 6200
-user = swift
-swift_dir = /etc/swift
-devices = /srv/node
-mount_check = True
+[filter:healthcheck]
+use = egg:swift#healthcheck
 
 [filter:recon]
+use = egg:swift#recon
 recon_cache_path = /var/cache/swift
 recon_lock_path = /var/lock
+
+[object-replicator]
+
+[object-reconstructor]
+
+[object-updater]
+
+[object-auditor]
+
+[object-expirer]
+[filter:xprofile]
+use = egg:swift#xprofile
 
 EOF
 
