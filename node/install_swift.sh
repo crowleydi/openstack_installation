@@ -42,7 +42,7 @@ sudo mkdir -p /srv/node/sdb
 cat <<EOF | sudo tee -a /etc/fstab > /dev/null
 /dev/sdb /srv/node/sdb xfs noatime,nodiratime,logbufs=8 0 2
 EOF
-sudo mount /srv/node/sdc
+sudo mount /srv/node/sdb
 
 # setup rsync
 cat <<EOF | sudo tee /etc/rsyncd.cond > /dev/null
@@ -91,7 +91,7 @@ sudo curl -o /etc/swift/object-server.conf https://opendev.org/openstack/swift/r
 
 #
 # edit config files
-cat <<EOF | sudo tee -a etc/swift/account-server.conf > /dev/null
+cat <<EOF | sudo tee -a /etc/swift/account-server.conf > /dev/null
 [DEFAULT]
 bind_ip = $IP
 bind_port = 6202
@@ -108,7 +108,7 @@ use = egg:swift#recon
 recon_cache_path = /var/cache/swift
 EOF
 
-cat <<EOF | sudo tee -a etc/swift/container-server.conf > /dev/null
+cat <<EOF | sudo tee -a /etc/swift/container-server.conf > /dev/null
 [DEFAULT]
 bind_ip = $IP
 bind_port = 6201
@@ -126,7 +126,7 @@ recon_cache_path = /var/cache/swift
 
 EOF
 
-cat <<EOF | sudo tee -a etc/swift/object-server.conf > /dev/null
+cat <<EOF | sudo tee -a /etc/swift/object-server.conf > /dev/null
 [DEFAULT]
 bind_ip = $IP
 bind_port = 6200
@@ -145,7 +145,7 @@ recon_lock_path = /var/lock
 
 EOF
 
-sudo chown -R swift:swift /src/node
+sudo chown -R swift:swift /srv/node
 sudo mkdir -p /var/cache/swift
 sudo chown -R root:swift /var/cache/swift
 sudo chmod -R 775 /var/cache/swift
