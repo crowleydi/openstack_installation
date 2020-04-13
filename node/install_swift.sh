@@ -91,85 +91,46 @@ sudo curl -o /etc/swift/object-server.conf https://opendev.org/openstack/swift/r
 
 #
 # edit config files
-cat <<EOF | sudo tee /etc/swift/account-server.conf > /dev/null
+cat <<EOF | sudo tee -a /etc/swift/account-server.conf > /dev/null
 [DEFAULT]
 bind_ip = $IP
-bind_port = 6202
+#bind_port = 6202
 user = swift
 swift_dir = /etc/swift
 devices = /srv/node
 mount_check = True
 
-[pipeline:main]
-pipeline = healthcheck recon account-server
-
-[app:account-server]
-use = egg:swift#account
-
 [filter:recon]
-use = egg:swift#recon
 recon_cache_path = /var/cache/swift
-
-[filter:healthcheck]
-use = egg:swift#healthcheck
-
-[filter:xprofile]
-use = egg:swift#xprofile
 
 EOF
 
-cat <<EOF | sudo tee /etc/swift/container-server.conf > /dev/null
+cat <<EOF | sudo tee -a /etc/swift/container-server.conf > /dev/null
 [DEFAULT]
 bind_ip = $IP
-bind_port = 6201
+#bind_port = 6201
 user = swift
 swift_dir = /etc/swift
 devices = /srv/node
 mount_check = True
 
-[pipeline:main]
-pipeline = healthcheck recon container-server
-
-[app:container-server]
-use = egg:swift#container
-
-[filter:healthcheck]
-use = egg:swift#healthcheck
-
 [filter:recon]
-use = egg:swift#recon
 recon_cache_path = /var/cache/swift
-
-[filter:xprofile]
-use = egg:swift#xprofile
 
 EOF
 
-cat <<EOF | sudo tee /etc/swift/object-server.conf > /dev/null
+cat <<EOF | sudo tee -a /etc/swift/object-server.conf > /dev/null
 [DEFAULT]
 bind_ip = $IP
-bind_port = 6200
+#bind_port = 6200
 user = swift
 swift_dir = /etc/swift
 devices = /srv/node
 mount_check = True
 
-[pipeline:main]
-pipeline = healthcheck recon object-server
-
-[app:object-server]
-use = egg:swift#object
-
-[filter:healthcheck]
-use = egg:swift#healthcheck
-
 [filter:recon]
-use = egg:swift#recon
 recon_cache_path = /var/cache/swift
 recon_lock_path = /var/lock
-
-[filter:xprofile]
-use = egg:swift#xprofile
 
 EOF
 
